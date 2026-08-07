@@ -1,0 +1,23 @@
+name: Download Freebuff
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download official Freebuff
+        run: |
+          curl -fL \
+            --retry 20 \
+            --retry-all-errors \
+            --connect-timeout 30 \
+            -o freebuff-win32-x64.tar.gz \
+            "https://codebuff.com/api/releases/download/0.0.142/freebuff-win32-x64.tar.gz"
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: freebuff-win32-x64-0.0.142
+          path: freebuff-win32-x64.tar.gz
